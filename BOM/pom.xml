@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>it.dipendentepubico.CCIS</groupId>
+    <artifactId>bom</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Ciccio Cappuccio Interexchange Service Bill Of Materials</name>
+    <description>Interfacce comuni per l&apos;interoperabilità tra i software della Pubblica Amministrazione</description>
+    <packaging>pom</packaging>
+    <properties>
+        <CCIS.version>0.0.1-SNAPSHOT</CCIS.version>
+<!--        spring boot property-->
+        <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-boot.version>2.4.5</spring-boot.version>
+        <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <org.mapstruct.extensions.spring.version>0.0.3</org.mapstruct.extensions.spring.version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>it.dipendentepubico.CCIS</groupId>
+                <artifactId>domain</artifactId>
+                <version>${CCIS.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.dipendentepubico.CCIS</groupId>
+                <artifactId>usecase</artifactId>
+                <version>${CCIS.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.dipendentepubico.CCIS</groupId>
+                <artifactId>converter</artifactId>
+                <version>${CCIS.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.dipendentepubico.CCIS</groupId>
+                <artifactId>service</artifactId>
+                <version>${CCIS.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.dipendentepubico.CCIS</groupId>
+                <artifactId>adapter-majol</artifactId>
+                <version>${CCIS.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.dipendentepubico.CCIS</groupId>
+                <artifactId>adapter-cometa</artifactId>
+                <version>${CCIS.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.xml.bind</groupId>
+                <artifactId>jakarta.xml.bind-api</artifactId>
+                <version>2.3.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${org.mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct.extensions.spring</groupId>
+                <artifactId>mapstruct-spring-annotations</artifactId>
+                <version>${org.mapstruct.extensions.spring.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <source>11</source>
+                        <target>11</target>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.mapstruct.extensions.spring</groupId>
+                                <artifactId>mapstruct-spring-extensions</artifactId>
+                                <version>${org.mapstruct.extensions.spring.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${org.mapstruct.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <!-- JUnit 5 requires Surefire version 2.22.0 or higher -->
+                    <version>2.22.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+
+
+</project>

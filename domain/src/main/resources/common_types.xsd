@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dipendentepubico" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://dipendentepubico.it/ccis" elementFormDefault="qualified"
+           xmlns:tns="https://dipendentepubico.it/ccis"
+           xmlns:fe="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2"
+>
+
+    <xs:import schemaLocation="gov/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd" namespace="http://ivaservizi.agenziaentrate.gov.it/docs/xsd/fatture/v1.2" />
+
+    <xs:complexType name="paged_search_request">
+        <xs:sequence>
+            <xs:element name="paging" type="tns:paging_type" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="paging_type">
+        <xs:all>
+            <xs:element name="offset">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer"/>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="page_size">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer"/>
+                </xs:simpleType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="integer_with_operation_type">
+        <xs:simpleContent>
+            <xs:extension base="xs:integer">
+                <xs:attribute name="op" type="tns:operation_number_enum_type"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="decimal_with_operation_type">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="op" type="tns:operation_number_enum_type"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="string_with_operation_type">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="op" type="tns:operation_string_enum_type"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="date_with_operation_type">
+        <xs:simpleContent>
+            <xs:extension base="xs:date">
+                <xs:attribute name="op" type="tns:operation_number_enum_type"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="codiceFiscale_type">
+        <xs:simpleContent>
+            <xs:extension base="tns:codiceFiscale_pattern_type">
+                <xs:attribute name="op" type="tns:operation_string_enum_type"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:simpleType name="codiceFiscale_pattern_type">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{11}"/>
+            <xs:pattern
+                    value="[A-Z]{6}[0-9A-Z][0-9LMNPQRSTUV][ABCDEHLMPRST][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="mandato_type">
+        <xs:sequence>
+<!-- preferisco creare un tipo complesso con nome sensato piuttosto che fare così
+<xs:element name="codice" minOccurs="0" type="tns:number_with_operation_type"/>
+-->
+            <xs:element name="codice" minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:restriction base="tns:integer_with_operation_type"/>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="data" minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:restriction base="tns:date_with_operation_type"/>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="anno" minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:restriction base="tns:integer_with_operation_type"/>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="beneficiario" type="tns:beneficiario_type" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="beneficiario_type">
+        <xs:sequence>
+            <xs:element name="codiceFiscale" type="tns:codiceFiscale_type" minOccurs="0"/>
+            <xs:element name="partitaIva" type="tns:partitaIva_type" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="partitaIva_type">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{11}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="operation_number_enum_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="lg"/>
+            <xs:enumeration value="gt"/>
+            <xs:enumeration value="eq"/>
+            <xs:enumeration value="ne"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="operation_string_enum_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="eq"/>
+            <xs:enumeration value="ne"/>
+            <xs:enumeration value="like"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="flusso_sdi_type">
+        <xs:sequence>
+            <xs:element name="identificativo_sdi" minOccurs="0">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:restriction base="tns:integer_with_operation_type"/>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="fattura_elettronica" type="fe:FatturaElettronicaType" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+
+</xs:schema>

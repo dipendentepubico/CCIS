@@ -1,0 +1,45 @@
+<mandato_ricerca>
+  <!--Optional:-->
+  <or>
+    <!--1 or more repetitions:-->
+    <mandato>
+      <!--Optional:-->
+      <codice op="eq">100</codice>
+      <!--Optional:-->
+      <data op="lg">2013-11-23</data>
+      <!--Optional:-->
+      <anno op="lg">100</anno>
+      <!--Optional:-->
+      <beneficiario>
+        <!--Optional:-->
+        <codiceFiscale>string</codiceFiscale>
+        <!--Optional:-->
+        <partitaIva>string</partitaIva>
+      </beneficiario>
+    </mandato>
+  </or>
+  <!--Optional:-->
+  <and>
+    <!--1 or more repetitions:-->
+    <mandato>
+      <!--Optional:-->
+      <codice op="gt">100</codice>
+      <!--Optional:-->
+      <data op="eq">2008-11-15</data>
+      <!--Optional:-->
+      <anno op="lg">100</anno>
+      <!--Optional:-->
+      <beneficiario>
+        <!--Optional:-->
+        <codiceFiscale>string</codiceFiscale>
+        <!--Optional:-->
+        <partitaIva>string</partitaIva>
+      </beneficiario>
+    </mandato>
+  </and>
+  <!--Optional:-->
+  <paging>
+    <offset>100</offset>
+    <page_size>100</page_size>
+  </paging>
+</mandato_ricerca>

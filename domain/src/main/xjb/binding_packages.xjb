@@ -1,0 +1,32 @@
+<jxb:bindings version="1.0"
+              xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <!--
+        Change since version 2.0 of the j-m-p:
+
+        Note that the schemaLocation path must point to the XSD file
+        relative to *this* file, rather than the basedir.
+    -->
+
+    <jxb:bindings schemaLocation="../resources/mandato.xsd" node="//xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="it.dipendentepubico.CCIS.domain.model"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+
+    <jxb:bindings schemaLocation="../resources/gov/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd" node="//xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="it.gov.agenziaentrate.ivaservizi.fatturaelettronica"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+
+    <jxb:bindings schemaLocation="../resources/gov/xmldsig-core-schema.xsd" node="//xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.w3.xmldsig"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+
+
+
+</jxb:bindings>

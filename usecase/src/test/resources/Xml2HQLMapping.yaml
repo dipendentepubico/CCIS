@@ -1,0 +1,31 @@
+# sample mapping file to configure and put into vendor-database-adapter project
+# maps xml xpath to hql entity path
+# htype is the class attribute type. it is necessary to compose operation on column
+requestMap:
+  mandatoRequest:
+    fromMap : MandatoTESTImpl
+    pathToInfo:
+      mandato.codice:
+        hname: theEntity.codMandato
+        htype: string
+      mandato.data:
+        hname: theEntity.data
+        htype: date
+      mandato.anno:
+        hname: theEntity.anno
+        htype: integer
+      mandato.beneficiario.codiceFiscale:
+        hname: theEntity.benefic.codFiscale
+        htype: string
+      mandato.beneficiario.partitaIva:
+        hname: theEntity.benefic.anagDet.partitaIva
+        htype: string
+  fatturaElettronicaRequest:
+    fromMap: FattureTESTImpl
+    pathToInfo:
+      fattura.identificativo_sdi:
+        hname: theEntity.flusso.identificativoSdi
+        htype: integer
+      fattura.fattura_elettronica.FatturaElettronicaBody.DatiGenerali.DatiGeneraliDocumento.Numero:
+        hname: theEntity.numero
+        htype: string

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://dipendentepubico.it/ccis" elementFormDefault="qualified"
+           xmlns:tns="https://dipendentepubico.it/ccis" >
+
+    <xs:include schemaLocation="common_types.xsd" />
+
+    <xs:element name="mandatoRequest">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="tns:paged_search_request">
+                    <xs:sequence>
+                        <xs:element name="or" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="mandato" type="tns:mandato_type" minOccurs="1" maxOccurs="unbounded"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="and" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="mandato" type="tns:mandato_type" minOccurs="1" maxOccurs="unbounded"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="mandatoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="mandato" type="tns:mandato_type" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+</xs:schema>
